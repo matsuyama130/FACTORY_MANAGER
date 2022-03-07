@@ -8,7 +8,7 @@ $task_id = $_GET['task_id'];
 $pdo = connect_to_db();
 
 
-$sql = 'SELECT COUNT(*) FROM check_table WHERE task_id=:task_id';
+$sql = 'SELECT COUNT(*) FROM check_table WHERE user_id=:user_id AND task_id=:task_id';
 
 $stmt = $pdo->prepare($sql);
 //$stmt->bindValue(':user_id', $user_id, PDO::PARAM_STR);
@@ -28,11 +28,10 @@ $check_count=$stmt->fetchColumn();
 
 if ($check_count!= 0) {
   // いいねされている状態
-  $sql = 'DELETE FROM check_table WHERE task_id=:task_id';
+  $sql = 'DELETE FROM check_table WHERE user_id=:user_id AND task_id=:task_id';
 } else {
   // いいねされていない状態
-  //$sql = 'INSERT INTO check_table (id, user_id, task_id, created_at) VALUES (NULL, :user_id, :task_id, sysdate())';}
-$sql = 'INSERT INTO check_table (id, task_id, created_at) VALUES (NULL, :task_id, sysdate())';
+  $sql = 'INSERT INTO check_table (id, user_id, task_id, created_at) VALUES (NULL, :user_id, :task_id, sysdate())';
 }
 
 $stmt = $pdo->prepare($sql);

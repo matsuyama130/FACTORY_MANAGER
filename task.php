@@ -28,20 +28,29 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $output = "";
 
+
 foreach ($result as $record) {
   $output .= "
-    <tr>
-      <td>{$record["date"]}</td>
-      <td>{$record["place"]}</td>
-      <td>{$record["machine"]}</td>
-      <td>{$record["task"]}</td>
-<td><a href='task_check_create.php?user_id={$user_id}&task_id={$record["id"]}'>移動({$record['check_count']})</a></td>
+    <tr> 
+  
       <td><a href='task_edit.php?id={$record["id"]}'>edit</a></td>
       <td><a href='task_delete.php?id={$record["id"]}'>delete</a></td>
+            <td>{$record["date"]}</td>
+      <td>{$record["place_a"]}</td>
+      <td>{$record["area_a"]}</td>
+      <td>{$record["machine_a"]}</td>
+      <td>{$record["place_b"]}</td>
+      <td>{$record["area_b"]}</td>
+      <td>{$record["machine_b"]}</td>
+      <td>{$record["type_key"]}</td>
+      <td>{$record["gauge_name"]}</td>
+      <td>{$record["staff"]}</td>
+
 
     </tr>
   ";
 }
+//<td><a href='task_check_create.php?user_id={$user_id}&task_id={$record["id"]}'>移動({$record['check_count']})</a></td>
 
 
 ?>
@@ -68,31 +77,176 @@ foreach ($result as $record) {
       <legend><a href="lost.php"><img src="img/kezuriya.png" alt=""></div></legend>
       
  <div class="menu">
-    <a href="tool.php">ツールリスト</a>
-    <a href="task.php">タスク</a>
-    <a href="bbs.php">掲示板</a>
+   <a href="task.php">タスク登録</a>
+    <a href="tool.php">ツール登録</a>
   <a href="lost_logout.php">ログアウト</a>
- </div>
+</div>
     <br> 
      <div class="input" >
-      <div>
-        登録エリア: <input type="text" name="place">
-      </div>
-      <div>
-        工作機械: <input type="text" name="machine">
-      </div>
        <div>
-        タスク: <input type="text" name="task">
+         <div>
+          工場A：<select name="place_a">
+                <option value="1">本社工場  </option>
+
+                </select>
+          </div>     
+          <div>
+          区画A：<select name="area_a">
+                  <option value="A-1">A-1</option>
+                  <option value="A-2">A-2</option>
+                  <option value="A-3">A-3</option>
+                  <option value="B-1">B-1</option>
+                  <option value="B-2">B-2</option>
+                  <option value="B-3">B-3</option>
+                   <option value="C-1">C-1</option>
+                  <option value="C-2">C-2</option>
+                  <option value="C-3">C-3</option>
+                  <option value="棚">棚</option>
+                  </select>
+          </div>
+          <div>
+           機械A：<select name="machine_a">
+                <option value="TAC-800">TAC-800</option>
+                <option value="TAC-950">TAC-950</option>
+                <option value="TAC-510">TAC-510</option>
+                <option value="SL-603-1">SL-603-1</option>
+                <option value="SL-603-2">SL-603-2</option>
+                <option value="SL-603-3">SL-603-3</option>
+                <option value="SL-603-4">SL-603-4</option>
+                <option value="NLX-4000">NLX-4000</option>
+                <option value="SL-25-G">SL-25-G</option>
+                <option value="SL-25-W">SL-25-W</option>
+                <option value="CL-200">CL-200</option>
+                <option value="SL-403">SL-403</option>
+                <option value="NL-2500">NL-2500</option>
+                <option value="NL-3000">NL-3000</option>
+                <option value="NLX-4000">NLX-4000</option>
+                <option value="VM73">VM73</option>
+                <option value="A66">A66</option>
+                <option value="VP1200">VP1200-1</option>
+                <option value="VP1200">VP1200-2</option>
+                <option value="MX520-PC4">MX520-PC4</option>
+                <option value="NV-5000">NV-5000</option>
+                <option value="NV-5000-APC">NV-5000-APC</option>
+                <option value="YZ-352">YZ-352</option>
+                <option value="YZ-500">YZ-500</option>
+                <option value="YZ-1332">YZ-1332</option>
+                <option value="MCR-A5C">MCR-A5C</option>
+                <option value="MA-600H">MA-600H</option>
+                <option value="B6G">B6G</option>
+                <option value="V33">V33</option>
+                </select>
+           </div>
+         </div>
+       <br> 
+       <div>
+       <div>
+          工場B：<select name="place_b">
+                <option value="1">本社工場  </option>
+
+                </select>
+          </div>
+       <div>
+          区画B：<select name="area_b">
+                  <option value="A-1">A-1</option>
+                  <option value="A-2">A-2</option>
+                  <option value="A-3">A-3</option>
+                  <option value="B-1">B-1</option>
+                  <option value="B-2">B-2</option>
+                  <option value="B-3">B-3</option>
+                    <option value="C-1">C-1</option>
+                  <option value="C-2">C-2</option>
+                  <option value="C-3">C-3</option>
+                  <option value="棚">棚</option>
+                  </select>
+          </div>
+          <div>
+           機械B：<select name="machine_b">
+                <option value="TAC-800">TAC-800</option>
+                <option value="TAC-950">TAC-950</option>
+                <option value="TAC-510">TAC-510</option>
+                <option value="SL-603-1">SL-603-1</option>
+                <option value="SL-603-2">SL-603-2</option>
+                <option value="SL-603-3">SL-603-3</option>
+                <option value="SL-603-4">SL-603-4</option>
+                <option value="NLX-4000">NLX-4000</option>
+                <option value="SL-25-G">SL-25-G</option>
+                <option value="SL-25-W">SL-25-W</option>
+                <option value="CL-200">CL-200</option>
+                <option value="SL-403">SL-403</option>
+                <option value="NL-2500">NL-2500</option>
+                <option value="NL-3000">NL-3000</option>
+                <option value="NLX-4000">NLX-4000</option>
+                <option value="VM73">VM73</option>
+                <option value="A66">A66</option>
+                <option value="VP1200">VP1200-1</option>
+                <option value="VP1200">VP1200-2</option>
+                <option value="MX520-PC4">MX520-PC4</option>
+                <option value="NV-5000">NV-5000</option>
+                <option value="NV-5000-APC">NV-5000-APC</option>
+                <option value="YZ-352">YZ-352</option>
+                <option value="YZ-500">YZ-500</option>
+                <option value="YZ-1332">YZ-1332</option>
+                <option value="MCR-A5C">MCR-A5C</option>
+                <option value="MA-600H">MA-600H</option>
+                <option value="B6G">B6G</option>
+                <option value="V33">V33</option>
+                </select>
+           </div>
+         </div>
+       <br> 
+      <div>
+         <div>
+            ゲージ種類：<select name="type_key">
+                  <option value="inside">inside</option>
+                  <option value="out micro">out micro</option>
+                  <option value="special micro">special micro</option>
+                  <option value="u micro">u micro</option>
+                  <option value="out caliper">out caliper</option>
+                  <option value="blade micro">blade micro</option>
+                  <option value="3 point micro">3 point micro</option>
+                  <option value="Inner micro">Inner micro</option>
+                  <option value="depth">depth</option>
+                  <option value="dial inner caliper">dial inner caliper</option>
+                  <option value="cylinder gauge">cylinder gauge</option>
+                  <option value="densitometer">densitometer</option>
+                  <option value="ph meter">ph meter</option>
+                  <option value="original gauge">original gauge</option>
+                  <option value="pin gauge">pin gauge</option>
+                  <option value="mastering">mastering</option>
+                  <option value="inner instrument">inner instrument</option>
+                  <option value="out instrument">out instrument</option>
+                  </select>
+      </div>
+<div>
+        ゲージ名称：<input type="text" name="gauge_name">
+      </div>
+      </div>
+         <br> 
+        <div>
+           <div>
+        期日：<input type="date" name="date">
       </div>
       <div>
-        持出日: <input type="date" name="date">
-      </div>
+        担当：<select name="staff">
+                  <option value="冨岡義勇">冨岡義勇</option>
+                  <option value="胡蝶しのぶ">胡蝶しのぶ</option>
+                  <option value="煉獄杏寿郎">煉獄杏寿郎</option>
+                  <option value="宇髄天元">宇髄天元</option>
+                  <option value="甘露寺蜜璃">甘露寺蜜璃</option>
+                  <option value="伊黒小芭内">伊黒小芭内</option>
+                  <option value="不死川実弥">不死川実弥</option>
+                  <option value="時透無一郎">時透無一郎</option>
+                  <option value="悲鳴嶼行冥">悲鳴嶼行冥</option>
+                  </select>
+          </div>  
+         
+
 </div>
+</form>
     <br> 
 
   <div class="input" >
-
-
       <div>
         <button>submit</button>
       </div>
@@ -105,18 +259,23 @@ foreach ($result as $record) {
 
 <body>
   <fieldset>
-    <legend>タスク一覧（ツールの運搬指示等）</legend>
+    <legend>AからBへ運ぶ指示が出せます（作業者には期日・いまある場所A・持ってく場所B・担当者を表示）</legend>
 
-    <table>
+    <table class="table2">
       <thead>
         <tr>
-          <th>登録日</th>
-          <th>エリア</th>
-          <th>機械</th>
-          <th>名称</th>
-          <th>状態</th>
           <th>編集</th>
           <th>削除</th>
+          <th>日時</th>
+          <th>工場A</th>
+          <th>エリアA</th>
+          <th>機械A</th>
+          <th>工場B</th>
+          <th>エリアB</th>
+          <th>機械B</th>
+          <th>種類</th>
+          <th>ツール</th>
+          <th>担当者</th>
         </tr>
       </thead>
       <tbody>
@@ -125,5 +284,12 @@ foreach ($result as $record) {
     </table>
   </fieldset>
 </body>
+
+  <div class="profile">
+    <header>
+      <img src="img/map.jpg" alt="">
+    </header>
+  </div>
+
 
 </html>

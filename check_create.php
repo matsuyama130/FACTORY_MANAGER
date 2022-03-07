@@ -5,6 +5,7 @@ include('functions.php');
 $user_id = $_GET['user_id'];
 $lost_id = $_GET['lost_id'];
 
+
 $pdo = connect_to_db();
 
 
